@@ -1,0 +1,222 @@
+  :root{
+    --header-height: 150px;   /* wysokość paska menu */
+  }
+  
+  @font-face {
+  font-family: 'DejaVu Sans Mono';
+  src: url('./fonts/DejaVuSansMono.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+  html, body{
+    height:100%;
+    margin:0;
+    font-family: 'Andale Mono', monospace;
+	letter-spacing: 1px;
+    background: #000;
+    color:#222;
+	font-size: 20px;
+  }
+
+  /* GŁÓWNY KONTEKST STRONY */
+  .page {
+    min-height:200vh; /* duża wysokość, żeby widać efekt odsłaniania */
+    padding-top: var(--header-height); /* odstęp od góry pod nagłówek */
+    box-sizing:border-box;
+  }
+
+/* NAGŁÓWEK / PASEK MENU */
+header.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--header-height);
+  z-index: 40;
+  color: #fff;
+}
+
+/* Wewnętrzny kontener – ogranicza szerokość i centruje treść */
+.header-inner {
+  max-width: 950px;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start; /* wyrównanie do góry zamiast do środka */
+  justify-content: space-between;
+  padding: 30px 40px 0;    /* mniejszy górny margines, mniej miejsca na dole */
+  text-align: center;
+  font-size: 25px;
+}
+
+.header-inner p {
+  margin: 0;
+  transform: translateY(15px); /* podnosi napis o 15px */
+  text-align: right;            /* żeby był po prawej stronie */
+  font-size: 22px;
+}
+
+/* Tło gradientowe paska */
+header.site-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(to bottom,
+    rgba(0,0,0,1) 0%,
+    rgba(0,0,0,1) 20%,
+    rgba(0,0,0,1) 60%,
+    rgba(0,0,0,0.75) 70%,
+    rgba(0,0,0,0.35) 85%,
+    rgba(0,0,0,0) 100%);
+  opacity: 1;
+}
+
+/* Logo / nazwa strony */
+.brand {
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  padding: 20px;
+}
+
+/* Obrazek pod nagłówkiem – wchodzi lekko pod gradient */
+.hero {
+  position: relative;
+  margin-top: calc(var(--header-height) * -0.5); /* -30% wysokości nagłówka, aby "wszedł" pod pasek */
+  z-index: 1; /* żeby był pod pseudo-elementem nagłówka (gradientem) */
+  text-align: center;
+  color:#fff;
+}
+
+.hero-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+
+  /* Karty / sekcje treści */
+  .card{
+    max-width:65%;
+    margin: 18px auto;
+    padding:24px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+	color:#fff;
+	text-align: center;
+  }
+  
+.card-fighter {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  max-width: 100%;
+  margin: 18px auto;
+  padding: 24px;
+  background: #000;
+  border-radius: 12px;
+}
+
+/* KAŻDY fighter ma taką samą ramkę */
+.image-link {
+  position: relative;
+  flex: 1;
+  max-width: 180px;     /* szerokość jednego fightera */
+  height: 300px;        /* WSPÓLNA wysokość */
+  overflow: hidden;
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* OBRAZEK wypełnia ramkę */
+.image-link img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;    /* KLUCZ: równe przycięcie */
+  display: block;
+}
+
+
+/* Tekstowy opis (pojawia się po najechaniu) */
+.image-link .caption {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.1rem;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+
+/* Efekt po najechaniu */
+.image-link:hover {
+  transform: scale(1.05);          /* lekkie powiększenie całości */
+  box-shadow: 0 10px 20px rgba(0,0,0,0.25);  /* cień pod spodem */
+}
+
+/* Efekty dla obrazka i opisu podczas hover */
+.image-link:hover img {
+  transform: scale(1.08);          /* delikatne powiększenie samego obrazka */
+  filter: brightness(0.9);         /* lekkie przyciemnienie tła */
+}
+
+.image-link:hover .caption {
+  opacity: 1;
+  transform: translateY(0);        /* wysunięcie napisu do góry */
+}
+
+
+  /* Drobne poprawki responsywne */
+  @media (max-width:600px){
+    header.site-header{ padding: 0 12px; }
+    nav a{ margin-left:10px; font-size:14px; }
+  }
+  
+  
+  /* FOOTER*/
+.social-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  margin: 40px 0;
+}
+
+.social-links a {
+  color: white;
+  font-size: 28px;
+  transition: transform 0.3s ease, color 0.3s ease;
+  text-decoration: none;
+}
+
+.social-links a:hover {
+  transform: scale(1.2);
+}
+
+/* (opcjonalnie) kolory hover dla poszczególnych ikon */
+.social-links a[aria-label="Instagram"]:hover { color: #E1306C; }
+.social-links a[aria-label="Spotify"]:hover { color: #1DB954; }
+.social-links a[aria-label="YouTube"]:hover { color: #FF0000; }
+.social-links a[aria-label="Facebook"]:hover { color: #1877F2; }
+
+.image-text-section {
+  max-width: 65%;
+  margin: 60px auto;
+  display: flex;
+  align-items: center;      /* wyrównanie w pionie */
+  gap: 40px;                /* odstęp między zdjęciem a tekstem */
+  color: #fff;
+}
+
+.image-box img {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
