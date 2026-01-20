@@ -156,13 +156,12 @@ header.site-header::before {
 
 /* Efekt po najechaniu */
 .image-link:hover {
-  transform: scale(1.05);          /* lekkie powiększenie całości */
+  transform: scale(1.07);          /* lekkie powiększenie całości */
   box-shadow: 0 10px 20px rgba(0,0,0,0.25);  /* cień pod spodem */
 }
 
 /* Efekty dla obrazka i opisu podczas hover */
 .image-link:hover img {
-  transform: scale(1.08);          /* delikatne powiększenie samego obrazka */
   filter: brightness(0.9);         /* lekkie przyciemnienie tła */
 }
 
@@ -199,6 +198,25 @@ header.site-header::before {
   transform: scale(1.2);
 }
 
+.spotify{
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+	color:#fff;
+	text-align: center;
+  }
+  
+  .spotify iframe {
+  width: 50%;
+  max-width: 800px;
+}
+
+@media (max-width: 768px) {
+  .spotify iframe {
+    width: 80%;
+    height: 152px;   /* idealna wysokość na mobile */
+  }
+}
+
+
 /* (opcjonalnie) kolory hover dla poszczególnych ikon */
 .social-links a[aria-label="Instagram"]:hover { color: #E1306C; }
 .social-links a[aria-label="Spotify"]:hover { color: #1DB954; }
@@ -219,4 +237,25 @@ header.site-header::before {
   max-width: 400px;
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+
+@media (max-width: 768px) {
+  .card-fighter {
+    justify-content: flex-start;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    gap: 16px;
+  }
+
+  .image-link {
+    flex: 0 0 70%;   /* szerokość jednej karty na mobile */
+    max-width: 70%;
+    height: 260px;
+  }
+
+  /* opcjonalnie – ukrycie paska przewijania */
+  .card-fighter::-webkit-scrollbar {
+    display: none;
+  }
 }
